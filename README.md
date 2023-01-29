@@ -58,3 +58,4 @@ There are still features which are to be added. Such as:-
 1. Smoother volume changes
 2. Addition of volume bar
 3. Better FPS
+4. Add windows and mac support
