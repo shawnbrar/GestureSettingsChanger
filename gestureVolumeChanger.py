@@ -1,6 +1,5 @@
 import cv2
 import mediapipe as mp
-import time
 import pulsectl
 import numpy as np
 
@@ -36,7 +35,6 @@ class gestureVolumeChanger:
         if self.gestureResult != 'Closed_Fist':
             results = self.hands.process(imgRGB)
             if results.multi_hand_landmarks:
-                print(results.multi_hand_landmarks)
                 thumb = results.multi_hand_landmarks[0].landmark[4]
                 index = results.multi_hand_landmarks[0].landmark[8]
                 thumb = {'x': round(thumb.x * img.shape[1]), 'y': round(thumb.y * img.shape[0])}
