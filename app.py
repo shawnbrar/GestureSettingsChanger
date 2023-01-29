@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import time
 import pulsectl
-import volcontrol_module
+import gestureVolumeChanger
 
 
 cap = cv2.VideoCapture(-1)
