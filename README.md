@@ -47,7 +47,7 @@ or
 
 ## Gestures
 
-A close fist with fingers in the front is recognized as a stop gesture. If you do this, then, the volume will not change. 
+Right hand should be used to control the volume. A close fist with fingers in the front is recognized as a stop gesture. If you do this, then, the volume will not change. 
 
 To change the volume bring together your index and thumb finger or move them apart.
 
