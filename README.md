@@ -49,7 +49,7 @@ or
 
 Right hand should be used to control the volume and the left hand should be used to control the brightness. A close fist with fingers in the front is recognized as a stop gesture. If you do this with either hand, then, the volume/brightness will not change. 
 
-To change the volume bring together your index and thumb finger or move them apart.
+To change the volume/brightness bring together your index and thumb finger or move them apart.
 
 ## Supported hardware
 This program is tested on a Ubuntu 22.04. It may work on other linux distribution. Development for Windows and Mac will take time.
