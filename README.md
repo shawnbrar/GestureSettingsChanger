@@ -1,6 +1,6 @@
 # Gesture Settings Changer
 
-A python module to change the volume of a computer using gestures. The module uses `opencv` to get the live video stream, the `mediapipe` library to recognize the gestures and then the `pulsectl` library to change the volume of the computer.	
+A python module to change the volume of a computer using gestures. The module uses `opencv` to get the live video stream, the `mediapipe` library to recognize the gestures and then the `pulsectl` library to change the volume/brightness of the computer.	
 
 ## Getting Started
 Below is an example of how use can use the module. First we import the `cv2` and `gestureSettingsChanger` modules
