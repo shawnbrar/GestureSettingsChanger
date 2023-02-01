@@ -7,7 +7,35 @@ import pulsectl
 import numpy as np
 
 class gestureSettingsChanger:
+    '''
+    A class to change computer brightness and volume using gestures. To be always initialized outside the while loop.
+    ...
+
+    Attributes:
+        gesture_recognizer_task_path : str
+            path to the trained model
+        threshold : int
+            threshold for increasing a setting or decreassing a setting
+
+    Methods
+        gestureRecognize(img: np.ndarray)
+            recognize the gesture in the image
+        changeSettings(img: np.ndarray)
+            increase or decrease the brightness/volume given an image
+    '''
     def __init__(self, gesture_recognizer_task_path: str, threshold: int = 60) -> None:
+        '''
+        Initializes class attributes
+        
+        Args:
+            gesture_recognizer_task_path : str
+                path to the trained model bundled
+            threshold : int
+                threshold for increasing a setting or decreasing a setting
+
+        Returns:
+            None
+        '''
         self.gesture_recognizer_task_path = gesture_recognizer_task_path
         self.threshold = threshold
         self.gestureResult = ''
@@ -15,7 +43,7 @@ class gestureSettingsChanger:
                 base_options=mp.tasks.BaseOptions(model_asset_path=self.gesture_recognizer_task_path),
                 running_mode=mp.tasks.vision.RunningMode.LIVE_STREAM,
                 min_hand_detection_confidence = 0.3,
-                result_callback=self.print_result
+                result_callback=self._print_result
                 )
         self.mpHands = mp.solutions.hands
         self.hands = self.mpHands.Hands(max_num_hands = 2)
@@ -23,17 +51,38 @@ class gestureSettingsChanger:
         self.pulse = pulsectl.Pulse('volume_changer')
         self.sink = self.pulse.sink_list()[0]
 
-    def print_result(self, result: mp.tasks.vision.GestureRecognizerResult, output_image: mp.Image, timestamp_ms: int):
+    def _print_result(self, result: mp.tasks.vision.GestureRecognizerResult, output_image: mp.Image, timestamp_ms: int):
         for gesture in result.gestures:
             self.gestureResult = [category.category_name for category in gesture][0]
         print(self.gestureResult)
 
     def gestureRecognize(self, img: np.ndarray) -> None:
+        '''
+        Recognize the gesture in the image
+
+        Args:
+            img : np.ndarray
+                an image
+        
+        Returns:
+            None
+
+        '''
         mp_image = mp.Image(image_format = mp.ImageFormat.SRGB, data = img)
         with mp.tasks.vision.GestureRecognizer.create_from_options(self.options) as recognizer:
             recognizer.recognize_async(mp_image, 10)
 
     def changeSettings(self, img: np.ndarray) -> None:
+        '''
+        Change the brightness and volume levels
+
+        Args:
+            img : np.ndarray
+                an image
+
+        Returns:
+            None
+        '''
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         if self.gestureResult != 'Closed_Fist':
             results = self.hands.process(imgRGB)

@@ -5,7 +5,7 @@ import gestureSettingsChanger
 cap = cv2.VideoCapture(-1)
 # gesture volume change - always to be declared outside the while loop
 gestSettingsControl = gestureSettingsChanger.gestureSettingsChanger("./gesture_recognizer.task", 60) 
-
+gsc = gestureSettingsChanger.gestureSettingsChanger("fdsf", "f")
 while True:
     success, img = cap.read()
     img = cv2.resize(img, (320, 240))
