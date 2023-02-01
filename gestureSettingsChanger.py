@@ -23,6 +23,7 @@ class gestureSettingsChanger:
         changeSettings(img: np.ndarray)
             increase or decrease the brightness/volume given an image
     '''
+
     def __init__(self, gesture_recognizer_task_path: str, threshold: int = 60) -> None:
         '''
         Initializes class attributes
@@ -54,7 +55,7 @@ class gestureSettingsChanger:
     def _print_result(self, result: mp.tasks.vision.GestureRecognizerResult, output_image: mp.Image, timestamp_ms: int):
         for gesture in result.gestures:
             self.gestureResult = [category.category_name for category in gesture][0]
-        print(self.gestureResult)
+        #print(self.gestureResult)
 
     def gestureRecognize(self, img: np.ndarray) -> None:
         '''
@@ -109,7 +110,7 @@ class gestureSettingsChanger:
             self.pulse.volume_set_all_chans(self.sink, 1)
         else:
             self.pulse.volume_change_all_chans(self.sink, volume_change)
-        cv2.putText(img, str(round(self.pulse.volume_get_all_chans(self.sink), 2)), (text_x, text_y), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 255), 3)
+        cv2.putText(img, str(int(round(self.pulse.volume_get_all_chans(self.sink), 2) * 100)), (text_x, text_y), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 255), 3)
         self.mpDraw.draw_landmarks(img, results.multi_hand_landmarks[0], self.mpHands.HAND_CONNECTIONS)
 
     def _leftHandBrightnessChanger(self, results, img: np.ndarray) -> None:
